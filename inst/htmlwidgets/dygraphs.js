@@ -413,22 +413,19 @@ HTMLWidgets.widget({
     var group = this.groups[x.group];
     
     attrs.highlightCallback = (function(group) {
-    
-    return {
-      function(e, x, pts, row) {
-        
-        // call existing
-        if (prevHighlightCallback)
-          prevHighlightCallback(e, x, pts, row);
-        
-        // sync peers in group
-        for (var j = 0; j < group.length; j++) {
-          group[j].setSelection(row);
-        }
-        console.log(group.length);
-      }
-    };
-  })(group);
+        return function(e, x, pts, row) {
+            
+            // call existing
+            if (prevHighlightCallback)
+              prevHighlightCallback(e, x, pts, row);
+            
+            // sync peers in group
+            for (var j = 0; j < group.length; j++) {
+              group[j].setSelection(row);
+            }
+            console.log(group.length);
+          };
+      })(group);
   },
   
   addShadingCallback: function(x) {

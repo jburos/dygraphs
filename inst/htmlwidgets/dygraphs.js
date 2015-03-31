@@ -82,9 +82,11 @@ HTMLWidgets.widget({
     attrs.file = HTMLWidgets.transposeArray2D(attrs.file);
     
     // add drawCallback for group
-    if (x.group != null)
-      this.addGroupDrawCallback(x);  
-      
+    if (x.group != null) {
+      this.addGroupDrawCallback(x);
+      this.addGroupHightlightCallback(x);
+    }
+          
     // add shading and event callback if necessary
     this.addShadingCallback(x);
     this.addEventCallback(x);
@@ -396,6 +398,30 @@ HTMLWidgets.widget({
         });
       }
       blockRedraw = false;
+    };
+  },
+  
+  addGroupHightlightCallback: function(x) {
+    
+    // get attrs
+    var attrs = x.attrs;
+    
+    // check for an existing highlightCallback
+    var prevHighlightCallback = attrs["highlightCallback"];
+    
+    this.groups[x.group] = this.groups[x.group] || [];
+    var group = this.groups[x.group];
+    
+    attrs.highlightCallback = function(e, x, pts, row) {
+      
+      // call existing
+      if (prevHighlightCallback)
+        prevHighlightCallback(e, x, pts, row);
+      
+      // sync peers in group
+      for (var j = 0; j < group.length; j++) {
+        group[j].setSelection(row);
+      }
     };
   },
   

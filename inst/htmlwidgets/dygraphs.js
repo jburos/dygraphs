@@ -425,7 +425,7 @@ HTMLWidgets.widget({
         for (var j = 0; j < group.length; j++) {
           group[j].setSelection(row);
         }
-        console.log(group.length)
+        console.log(group.length);
       }
     };
   })(group),

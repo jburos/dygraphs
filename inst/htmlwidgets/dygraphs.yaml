@@ -12,3 +12,8 @@ dependencies:
     version: 0.2.5
     src: "htmlwidgets/lib/timezone"
     script: 'moment-timezone-with-data.js'
+  - name: dygraphs-synchronizer
+    version: 1.0.1
+    src: "htmlwidgets/lib/synchronizer"
+    script: dygraphs-synchronizer.js
+    

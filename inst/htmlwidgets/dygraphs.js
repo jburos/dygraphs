@@ -408,9 +408,11 @@ HTMLWidgets.widget({
     
     // check for an existing highlightCallback
     var prevHighlightCallback = attrs["highlightCallback"];
+    var prevUnhighlightCallback = attrs["unhighlightCallback"];
     
     this.groups[x.group] = this.groups[x.group] || [];
     var group = this.groups[x.group];
+    var block = false;
     
     attrs.highlightCallback = (function(group) {
         return function(e, x, pts, row, seriesName) {
@@ -423,9 +425,22 @@ HTMLWidgets.widget({
             for (var j = 0; j < group.length; j++) {
               group[j].setSelection(row, seriesName);
             }
-            console.log(group.length);
           };
       })(group);
+      
+    attrs.unhighlightCallback = (function(group) {
+      return function(e, x, pts, row, seriesName) {
+            
+            // call existing
+            if (prevUnhighlightCallback)
+              prevUnhighlightCallback(e, x, pts, row, seriesName);
+            
+            // sync peers in group
+            for (var j = 0; j < group.length; j++) {
+              group[j].clearSelection();
+            }
+          };
+    })(group);
   },
   
   addShadingCallback: function(x) {

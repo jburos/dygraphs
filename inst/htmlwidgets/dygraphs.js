@@ -84,7 +84,7 @@ HTMLWidgets.widget({
     // add drawCallback for group
     if (x.group != null) {
       this.addGroupDrawCallback(x);
-      this.addGroupHightlightCallback(x);
+      this.addGroupHighlightCallback(x);
     }
           
     // add shading and event callback if necessary
@@ -401,7 +401,7 @@ HTMLWidgets.widget({
     };
   },
   
-  addGroupHightlightCallback: function(x) {
+  addGroupHighlightCallback: function(x) {
     
     // get attrs
     var attrs = x.attrs;
@@ -422,6 +422,7 @@ HTMLWidgets.widget({
       for (var j = 0; j < group.length; j++) {
         group[j].setSelection(row);
       }
+      console.log(group.length)
     };
   },
   

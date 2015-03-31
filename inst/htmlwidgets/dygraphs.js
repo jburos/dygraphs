@@ -428,7 +428,8 @@ HTMLWidgets.widget({
         console.log(group.length);
       }
     };
-  })(group),
+  })(group);
+  },
   
   addShadingCallback: function(x) {
     

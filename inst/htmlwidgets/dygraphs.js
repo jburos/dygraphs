@@ -413,15 +413,15 @@ HTMLWidgets.widget({
     var group = this.groups[x.group];
     
     attrs.highlightCallback = (function(group) {
-        return function(e, x, pts, row) {
+        return function(e, x, pts, row, seriesName) {
             
             // call existing
             if (prevHighlightCallback)
-              prevHighlightCallback(e, x, pts, row);
+              prevHighlightCallback(e, x, pts, row, seriesName);
             
             // sync peers in group
             for (var j = 0; j < group.length; j++) {
-              group[j].setSelection(row);
+              group[j].setSelection(row, seriesName);
             }
             console.log(group.length);
           };
